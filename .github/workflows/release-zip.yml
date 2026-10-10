@@ -15,6 +15,11 @@ jobs:
         run: |
           zip -r project.zip ./*
 
+      - name: Calculate SHA-1 Hash
+        id: sha
+        run: |
+          echo "hash=$(sha1sum project.zip | awk '{ print $1 }')" >> $GITHUB_OUTPUT
+
       - name: Create / update release
         uses: softprops/action-gh-release@v1
         with:
